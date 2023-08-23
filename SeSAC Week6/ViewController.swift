@@ -83,7 +83,8 @@ class ViewController: UIViewController {
         let vc1 = SnapKitViewController()
         let vc2 = TextViewController()
         let vc3 = AssignmentViewController()
-        present(vc3, animated: true)
+        let vc4 = LocationViewController()
+        present(vc4, animated: true)
         
     }
     

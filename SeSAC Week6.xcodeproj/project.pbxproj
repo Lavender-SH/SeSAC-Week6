@@ -18,6 +18,7 @@
 		02204FAB2A945CD9005A02FA /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02204FAA2A945CD9005A02FA /* TextViewController.swift */; };
 		02204FAD2A947930005A02FA /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02204FAC2A947930005A02FA /* LocationViewController.swift */; };
 		02204FAF2A94ED5B005A02FA /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02204FAE2A94ED5B005A02FA /* AssignmentViewController.swift */; };
+		02821F3B2A96254D00FE5812 /* AssigmentTheater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02821F3A2A96254D00FE5812 /* AssigmentTheater.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		02204FAA2A945CD9005A02FA /* TextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		02204FAC2A947930005A02FA /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		02204FAE2A94ED5B005A02FA /* AssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
+		02821F3A2A96254D00FE5812 /* AssigmentTheater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigmentTheater.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				02204FAE2A94ED5B005A02FA /* AssignmentViewController.swift */,
 				02204FAA2A945CD9005A02FA /* TextViewController.swift */,
 				02204FAC2A947930005A02FA /* LocationViewController.swift */,
+				02821F3A2A96254D00FE5812 /* AssigmentTheater.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				02204FAB2A945CD9005A02FA /* TextViewController.swift in Sources */,
 				02204FA92A944683005A02FA /* SnapViewController.swift in Sources */,
 				02204F8F2A930A15005A02FA /* ViewController.swift in Sources */,
+				02821F3B2A96254D00FE5812 /* AssigmentTheater.swift in Sources */,
 				02204FAD2A947930005A02FA /* LocationViewController.swift in Sources */,
 				02204F8B2A930A15005A02FA /* AppDelegate.swift in Sources */,
 				02204FAF2A94ED5B005A02FA /* AssignmentViewController.swift in Sources */,
