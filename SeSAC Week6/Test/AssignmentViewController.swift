@@ -32,6 +32,10 @@ class AssignmentViewController: UIViewController {
         view.placeholder = "제목을 입력해주세요"
         view.textAlignment = .center
         view.font = .boldSystemFont(ofSize: 15)
+        
+        
+        
+        
         return view
     }()
     

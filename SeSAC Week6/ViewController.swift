@@ -80,11 +80,13 @@ class ViewController: UIViewController {
     
     @objc func signButtonClicked() {
         
-        let vc1 = SnapKitViewController()
-        let vc2 = TextViewController()
-        let vc3 = AssignmentViewController()
-        let vc4 = LocationViewController()
-        present(vc4, animated: true)
+//        let vc1 = SnapKitViewController()
+//        let vc2 = TextViewController()
+//        let vc3 = AssignmentViewController()
+//        let vc4 = LocationViewController()
+//        present(vc2, animated: true)
+        
+        transition(viewController: GenericViewController.self, storyboard: "Main", style: .presentNavigation)
         
     }
     

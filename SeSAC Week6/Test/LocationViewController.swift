@@ -44,7 +44,7 @@ class LocationViewController: UIViewController {
         
         view.addSubview(filterButton)
         filterButton.backgroundColor = .gray
-        filterButton.addTarget(self, action: #selector(showFilterOptions), for: .touchUpInside)
+        filterButton.addTarget(self, action: #selector(filterButtonClicked), for: .touchUpInside)
         filterButton.snp.makeConstraints { make in
             make.top.equalTo(view).offset(100)
             make.size.equalTo(50)
@@ -54,7 +54,7 @@ class LocationViewController: UIViewController {
         // 3. 위치 프로토콜 연결
         locationManager.delegate = self
         checkDeviceLocationAuthorization() // // iOS 위치 서비스 활성화 체크
-        let center = CLLocationCoordinate2D(latitude: 37.518385, longitude: 126.884187)
+        let center = CLLocationCoordinate2D(latitude: 37.4824761978647, longitude: 126.9521680487202)
         setRegionAndAnnotation(center: center)
         setAnnotation(type: 0)
         addTheaterAnnotations(theaterList.mapAnnotations)
@@ -84,46 +84,56 @@ class LocationViewController: UIViewController {
         
     }
     //😎
-    @objc func showFilterOptions() {
-        let actionSheet = UIAlertController(title: "Filter", message: "Select a theater type", preferredStyle: .actionSheet)
+    @objc func filterButtonClicked() {
+        let actionSheetController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let lotteCinemaAction = UIAlertAction(title: "롯데시네마", style: .default)
-        
-        let megaboxAction = UIAlertAction(title: "메가박스", style: .default)
-        
-        let cgvAction = UIAlertAction(title: "CGV", style: .default)
-        
-        let showAllAction = UIAlertAction(title: "전체보기", style: .default) { _ in
-            self.addTheaterAnnotations(self.theaterList.mapAnnotations)
+        let lotteCinema = UIAlertAction(title: "롯데시네마", style: .default) { _ in
+            self.filterAnnotation(keyword: "롯데시네마")
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let actionMegaBox = UIAlertAction(title: "메가박스", style: .default) { _ in
+            self.filterAnnotation(keyword: "메가박스")
+        }
         
-        actionSheet.addAction(lotteCinemaAction)
-        actionSheet.addAction(megaboxAction)
-        actionSheet.addAction(cgvAction)
-        actionSheet.addAction(showAllAction)
-        actionSheet.addAction(cancelAction)
+        let actionCGV = UIAlertAction(title: "CGV", style: .default) { _ in
+            self.filterAnnotation(keyword: "CGV")
+        }
         
-        present(actionSheet, animated: true, completion: nil)
-    }
-
-    
-
-    //😎
-    func setRegionAndAnnotation(center: CLLocationCoordinate2D, annotations: [MKAnnotation]) {
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 400, longitudinalMeters: 400)
-        mapView.setRegion(region, animated: true)
+        let actionShowAll = UIAlertAction(title: "전체보기", style: .default) { _ in
+            self.filterAnnotation(keyword: "전체보기")
+        }
         
-        mapView.removeAnnotations(mapView.annotations) // Remove existing annotations
-        mapView.addAnnotations(annotations)
+        let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        let userAnnotation = MKPointAnnotation()
-        userAnnotation.title = "Your Location"
-        userAnnotation.coordinate = center
-        mapView.addAnnotation(userAnnotation)
+        actionSheetController.addAction(lotteCinema)
+        actionSheetController.addAction(actionMegaBox)
+        actionSheetController.addAction(actionCGV)
+        actionSheetController.addAction(actionShowAll)
+        actionSheetController.addAction(actionCancel)
+        
+        self.present(actionSheetController, animated: true, completion: nil)
     }
     
+    func filterAnnotation(keyword : String) {
+        mapView.removeAnnotation(mapView.annotations as! MKAnnotation)
+    
+        let value = keyword == "전체보기" ? theaterList.mapAnnotations : theaterList.mapAnnotations.filter { $0.type == keyword }
+        
+        value.forEach { item in
+            setMovieAnnotation(type: item.type, location: item.location, latitude: item.latitude, longitude: item.longitude)
+        }
+    }
+    
+    
+    
+    func setMovieAnnotation(type: String, location: String, latitude: Double, longitude: Double) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        annotation.title = type
+        annotation.subtitle = location
+        mapView.addAnnotation(annotation)
+    }
+
     // MARK: - 지도 뷰에 어노테이션(annotation)을 추가하거나 제거하는 역할
     func setAnnotation(type: Int) {
         print("=====333=====", type)
@@ -132,24 +142,25 @@ class LocationViewController: UIViewController {
         //37.518107, 126.884798 seven
         //37.518135, 126.885853 청년취업사관학교
 
-        
         let annotation1 = MKPointAnnotation()
-        annotation1.coordinate = CLLocationCoordinate2D(latitude: 37.518107, longitude: 126.884798)
+        annotation1.coordinate = CLLocationCoordinate2D(latitude: 37.4824761978647, longitude: 126.9521680487202)
         
 //        mapView.removeAnnotation(annotation1)
         
         let annotation2 = MKPointAnnotation()
-        annotation2.coordinate = CLLocationCoordinate2D(latitude: 37.517746, longitude: 126.887131)
+        annotation2.coordinate = CLLocationCoordinate2D(latitude: 37.47947929602294, longitude: 126.88891083192269)
         
+        let annotation3 = MKPointAnnotation()
+        annotation3.coordinate = CLLocationCoordinate2D(latitude: 48581351541419, longitude: 98092132899579)
 //        mapView.addAnnotations([annotation2])
         
         if type == 0 { //viewDidLoad때 annotation1, annotation2를 지도에 추가
-            mapView.addAnnotations([annotation1, annotation2])
+            mapView.addAnnotations([annotation1, annotation2, annotation3])
         
         } else if type == 1 {
             //이전에 추가되어 있는 모든 어노테이션을 제거한 후에 annotation2 어노테이션을 추가
             mapView.removeAnnotations(mapView.annotations)
-            mapView.addAnnotations([annotation2])
+            mapView.addAnnotations([annotation2, annotation3])
         }
     }
     
@@ -233,7 +244,8 @@ class LocationViewController: UIViewController {
         case .denied: //사용자가 위치 권한을 거부한 상태.
             print("denied")
             showLocationSetiingAlert() //위치 설정을 변경하도록 유도하는 알림창을 표시
-            setMapViewCenterBasedOnAuthorization()
+            //setMapViewCenterBasedOnAuthorization()
+            
         case .authorizedAlways: //항상 위치 사용 권한이 허용된 상태
             print("authorizedAlways")
             setMapViewCenterBasedOnAuthorization()
@@ -301,6 +313,13 @@ extension LocationViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         print(#function)
         checkDeviceLocationAuthorization() //위치 권한 상태를 확인하고 처리.
+        
+    }
+    
+    func locationManager2(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
+            // 위치 정보 접근 권한이 g다시 허용되었을 때 처리할 작업
+        }
     }
     
     //사용자의 위치 권한 상태가 변경되었을 때(iOS 14 미만), 호출됨. iOS 14 이상에서는 위의 locationManagerDidChangeAuthorization를 사용하므로
@@ -322,7 +341,7 @@ extension LocationViewController: MKMapViewDelegate {
     }
     
     //지도 상에서 어노테이션(annotation)을 선택했을 때 호출
-    func mapView(_ mapView: MKMapView, didSㄴelect annotation: MKAnnotation) {
+    func mapView(_ mapView: MKMapView, didSelect annotation: MKAnnotation) {
         print(#function)
     }
     //  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
