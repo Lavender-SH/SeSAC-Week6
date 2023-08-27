@@ -28,6 +28,7 @@
 		02F8EA092A984B5D0014CF7C /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8EA082A984B5D0014CF7C /* OnboardingViewController.swift */; };
 		02F8EA0B2A99DFD30014CF7C /* JackFlixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8EA0A2A99DFD30014CF7C /* JackFlixViewController.swift */; };
 		02F8EA0D2A99E7240014CF7C /* CustomJACKFLIX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8EA0C2A99E7240014CF7C /* CustomJACKFLIX.swift */; };
+		02F8EA0F2A9B7A690014CF7C /* MainMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F8EA0E2A9B7A690014CF7C /* MainMovieViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		02F8EA082A984B5D0014CF7C /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		02F8EA0A2A99DFD30014CF7C /* JackFlixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JackFlixViewController.swift; sourceTree = "<group>"; };
 		02F8EA0C2A99E7240014CF7C /* CustomJACKFLIX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomJACKFLIX.swift; sourceTree = "<group>"; };
+		02F8EA0E2A9B7A690014CF7C /* MainMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				02204FAE2A94ED5B005A02FA /* AssignmentViewController.swift */,
 				02F8EA0A2A99DFD30014CF7C /* JackFlixViewController.swift */,
 				02F8EA0C2A99E7240014CF7C /* CustomJACKFLIX.swift */,
+				02F8EA0E2A9B7A690014CF7C /* MainMovieViewController.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				02F8E9FA2A96F14D0014CF7C /* Extension+UIViewController.swift in Sources */,
 				02204F8D2A930A15005A02FA /* SceneDelegate.swift in Sources */,
 				02F8EA062A9840EA0014CF7C /* PosterImageView.swift in Sources */,
+				02F8EA0F2A9B7A690014CF7C /* MainMovieViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
