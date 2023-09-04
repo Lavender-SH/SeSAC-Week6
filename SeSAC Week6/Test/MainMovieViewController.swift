@@ -12,25 +12,26 @@ class MainMovieViewController: UIViewController {
     
     let backgroundImageView = {
         let imageView = UIImageView(image: UIImage(named: "어벤져스엔드게임"))
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
-    let circleImageView = {
+     let circleImageView = {
         let circleView = UIImageView(image: UIImage(named: "겨울왕국"))
-        circleView.contentMode = .scaleAspectFill
+        circleView.contentMode = .scaleAspectFill //⭐️⭐️⭐️
         circleView.clipsToBounds = true
-        circleView.layer.cornerRadius = circleView.frame.width / 5
+        //circleView.layer.cornerRadius = circleView.frame.width / 2
         circleView.layer.borderWidth = 3
         circleView.layer.borderColor = UIColor.gray.cgColor
         return circleView
     }()
     
+    
     let circleTwoImageView = {
         let circleView = UIImageView(image: UIImage(named: "광해"))
         circleView.contentMode = .scaleAspectFill
         circleView.clipsToBounds = true
-        circleView.layer.cornerRadius = circleView.frame.width / 5
+        //circleView.layer.cornerRadius = circleView.frame.width / 2
         circleView.layer.borderWidth = 3
         circleView.layer.borderColor = UIColor.gray.cgColor
         return circleView
@@ -40,19 +41,20 @@ class MainMovieViewController: UIViewController {
         let circleView = UIImageView(image: UIImage(named: "아바타"))
         circleView.contentMode = .scaleAspectFill
         circleView.clipsToBounds = true
-        circleView.layer.cornerRadius = circleView.frame.width / 5
+        //circleView.layer.cornerRadius = circleView.frame.width / 2
         circleView.layer.borderWidth = 3
         circleView.layer.borderColor = UIColor.gray.cgColor
         return circleView
     }()
     // MARK: - 스택뷰 연습
     lazy var stackView: UIStackView = {
-        let stview = UIStackView(arrangedSubviews: [circleImageView, circleTwoImageView, circleThirdImageView])
-        stview.spacing = 10
-        stview.axis = .horizontal
-        stview.distribution = .fillEqually
-        stview.alignment = .fill
-        return stview
+        let stackView = UIStackView(arrangedSubviews: [circleImageView, circleTwoImageView, circleThirdImageView])
+        stackView.spacing = 0
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.backgroundColor = .yellow
+        return stackView
     }()
     
     let playButton = {
@@ -73,21 +75,22 @@ class MainMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         view.backgroundColor = .black
         view.addSubview(backgroundImageView)
-        view.addSubview(circleImageView)
-        view.addSubview(circleTwoImageView)
-        view.addSubview(circleThirdImageView)
+        //view.addSubview(circleImageView)
+        //view.addSubview(circleTwoImageView)
+        //view.addSubview(circleThirdImageView)
         view.addSubview(stackView)
         view.addSubview(playButton)
         
         backgroundImageConstraints()
-        //circleImageConstraints()
-        //circleTwoImageConstraints()
-        //circleThirdImageConstraints()
+        circleImageConstraints()
+        circleTwoImageConstraints()
+        circleThirdImageConstraints()
         stackViewConstraints()
         buttonConstraints()
+        
+        setCornerRadiusForCircleImages()
     }
     
     
@@ -96,41 +99,46 @@ class MainMovieViewController: UIViewController {
             make.top.equalTo(view)
             make.leading.equalTo(view)
             make.trailing.equalTo(view)
-            make.bottom.equalTo(view).offset(-200)
+            make.bottom.equalTo(view).offset(-131)
         }
     }
     func circleImageConstraints() {
         circleImageView.snp.makeConstraints { make in
-            make.leading.equalTo(view).offset(10)
-            make.bottom.equalTo(view).offset(-20)
-            //make.size.equalTo(10)
-            make.top.equalTo(backgroundImageView.snp.bottom).offset(10)
-            make.size.equalTo(120)
+            make.top.equalTo(backgroundImageView.snp.bottom)
+            make.leading.equalTo(view)
+            make.bottom.equalTo(view)
+            //⭐️⭐️⭐️
+            make.width.equalTo(circleImageView.snp.height)
         }
     }
     func circleTwoImageConstraints() {
         circleTwoImageView.snp.makeConstraints { make in
-            make.top.equalTo(backgroundImageView.snp.bottom).offset(10)
-            make.bottom.equalTo(view).offset(-20)
-            make.leading.equalTo(circleImageView.snp.trailing).offset(10)
-            make.size.equalTo(120)
+            make.top.equalTo(backgroundImageView.snp.bottom)
+            make.bottom.equalTo(view)
+            make.leading.equalTo(circleImageView.snp.trailing)
+            //⭐️⭐️⭐️
+            make.width.equalTo(circleTwoImageView.snp.height)
+            
         }
     }
     func circleThirdImageConstraints() {
         circleThirdImageView.snp.makeConstraints { make in
-            make.top.equalTo(backgroundImageView.snp.bottom).offset(10)
-            make.bottom.equalTo(view).offset(-20)
-            make.leading.equalTo(circleTwoImageView.snp.trailing).offset(10)
-            make.size.equalTo(120)
+            make.top.equalTo(backgroundImageView.snp.bottom)
+            make.bottom.equalTo(view)
+            make.leading.equalTo(circleTwoImageView.snp.trailing)
+            //⭐️⭐️⭐️
+            make.width.equalTo(circleThirdImageView.snp.height)
         }
     }
     // MARK: - 스택뷰 오토레이아웃 연습
     func stackViewConstraints() {
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(backgroundImageView.snp.bottom).offset(10)
-            make.leading.equalTo(view).offset(10)
-            make.trailing.equalTo(view).offset(-10)
-            make.bottom.equalTo(view).offset(-20)
+            make.top.equalTo(backgroundImageView.snp.bottom)
+            make.leading.equalTo(view)
+            make.trailing.equalTo(view)
+            make.bottom.equalTo(view)
+            //⭐️⭐️⭐️
+            make.height.equalTo(stackView.snp.width).dividedBy(3)
         }
     }
     func buttonConstraints() {
@@ -141,11 +149,12 @@ class MainMovieViewController: UIViewController {
         }
     }
     
-
-    
-    
-    
-    
+//⭐️⭐️⭐️
+    func setCornerRadiusForCircleImages() {
+        circleImageView.layer.cornerRadius = 131 / 2
+        circleTwoImageView.layer.cornerRadius = 131 / 2
+        circleThirdImageView.layer.cornerRadius = 131 / 2
+    }
 }
 
 
